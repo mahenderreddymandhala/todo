@@ -1,0 +1,71 @@
+import "./App.css";
+import { useState } from "react";
+
+function App() {
+  const [activities, setActivites] = useState([
+    { id: 1, name: "brushing" },
+    { id: 4, name: "bathing" },
+    { id: 2, name: "bikeride" },
+    { id: 3, name: "officework" },
+  ]);
+
+  const [newTodo, setNewTodo] = useState("");
+  const [checked, setChecked] = useState([]);
+
+  // const [check, setCheck] = useState([]);
+
+  const onChangeCheckBox = (id) => {
+    setChecked((prevChecked) => {
+      if (prevChecked.includes(id)) {
+        return prevChecked.filter((checkedId) => checkedId !== id);
+      } else {
+        return [...prevChecked, id];
+      }
+    });
+
+  };
+
+  function deleteTodo(ID) {
+    setActivites(activities.filter((each) => each.id !== ID));
+  }
+
+  function onAddingNewTodo(newTodo){
+
+    const newTodoadding={
+      id:Date.now(),
+      name:newTodo
+    }
+    setActivites([...activities,newTodoadding])
+    setNewTodo("")
+  }
+
+  return (
+    <div className="App">
+      <h1>Todo Application</h1>
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+      />
+
+<button onClick={()=>onAddingNewTodo(newTodo)}> ADD TODO</button>
+      <div>
+        {activities.map((each) => (
+          <div className="align-parallel" key={each.id}>
+            <input
+              type="checkbox"
+              checked={checked.includes(each.id)}
+              onChange={() => onChangeCheckBox(each.id)}
+            />
+            <p className={checked.includes(each.id) ? "checked-style" : ""}>
+              {each.name}
+            </p>
+            <button onClick={() => deleteTodo(each.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
