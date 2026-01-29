@@ -20,11 +20,11 @@ function App (){
     const addToDo=()=>{
 let newTodo = {
             id:Date.now(),
-            name:word
+            name:word 
          }
 
-        //  console.log(newTodo)
-        //  console.log("24",todo)
+         console.log(newTodo)
+         console.log("24",todo)
         setTodo([...todo,newTodo])
 console.log(todo)
         setWord('')
