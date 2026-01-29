@@ -23,8 +23,7 @@ let newTodo = {
             name:word 
          }
 
-         console.log(newTodo)
-         console.log("24",todo)
+        
         setTodo([...todo,newTodo])
 console.log(todo)
         setWord('')
